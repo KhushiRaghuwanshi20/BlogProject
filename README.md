@@ -20,7 +20,7 @@ This project features a complete CRUD system with a secure backend and responsiv
 1. **Clone the repo:** `git clone https://github.com/KhushiRaghuwanshi20/BlogProject.git`
 2. **Setup Backend:** Go to `server` folder -> `npm install` ->
 3. **⚠️ Important:** Create a file named `.env` inside the `server` folder and add your MongoDB link:
-`MONGO_URI=your_connection_string_here``->node index.js`
+`MONGO_URI=your_connection_string_here``-> then on server folder -> node index.js`
 4. **Setup Frontend:** Go to `client` folder -> `npm install` -> `npm start`
 
 ---
