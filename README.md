@@ -18,8 +18,10 @@ This project features a complete CRUD system with a secure backend and responsiv
 ## ⚙️ How to Run Locally
 
 1. **Clone the repo:** `git clone https://github.com/KhushiRaghuwanshi20/BlogProject.git`
-2. **Setup Backend:** Go to `server` folder -> `npm install` -> `node index.js`
-3. **Setup Frontend:** Go to `client` folder -> `npm install` -> `npm start`
+2. **Setup Backend:** Go to `server` folder -> `npm install` ->
+3. **⚠️ Important:** Create a file named `.env` inside the `server` folder and add your MongoDB link:
+`MONGO_URI=your_connection_string_here``->node index.js`
+4. **Setup Frontend:** Go to `client` folder -> `npm install` -> `npm start`
 
 ---
 Developed by [Khushi Raghuwanshi](https://github.com/KhushiRaghuwanshi20)
