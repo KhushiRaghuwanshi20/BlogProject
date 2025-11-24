@@ -15,7 +15,13 @@ function App() {
 
   const fetchPosts = () => {
     axios.get('http://localhost:3001/posts')
-      .then(res => setPosts(res.data))
+      .then(res => {
+        if(Array.isArray(res.data)) {
+            setPosts(res.data);
+        } else {
+            setPosts([]);
+        }
+      })
       .catch(err => console.log(err));
   };
 
@@ -39,7 +45,6 @@ function App() {
 
   return (
     <div style={{ backgroundColor: '#f4f6f9', minHeight: '100vh' }}>
-      
       <nav className="navbar navbar-dark bg-dark shadow mb-4">
         <div className="container">
           <span className="navbar-brand fw-bold fs-3">
@@ -74,26 +79,29 @@ function App() {
 
           <div className="col-md-8">
             <h4 className="mb-3 text-secondary">Recent Posts ({posts.length})</h4>
-            {posts.length === 0 ? <p className="text-muted">No blogs yet. Be the first to write!</p> : null}
             
-            {posts.map(post => (
-              <div className="card shadow-sm border-0 mb-3" key={post._id} style={{transition: '0.3s'}}>
-                <div className="card-body">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <h5 className="card-title fw-bold text-dark">{post.title}</h5>
-                    <button onClick={() => handleDelete(post._id)} className="btn btn-sm btn-outline-danger border-0">
-                      <FaTrash />
-                    </button>
-                  </div>
-                  <h6 className="card-subtitle mb-2 text-muted" style={{fontSize:'0.85rem'}}>
-                    By <span className="text-info">{post.author}</span> • {new Date(post.date).toLocaleDateString()}
-                  </h6>
-                  <p className="card-text mt-3">{post.description}</p>
+            {Array.isArray(posts) && posts.length > 0 ? (
+                posts.map(post => (
+                <div className="card shadow-sm border-0 mb-3" key={post._id}>
+                    <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h5 className="card-title fw-bold text-dark">{post.title}</h5>
+                        <button onClick={() => handleDelete(post._id)} className="btn btn-sm btn-outline-danger border-0">
+                        <FaTrash />
+                        </button>
+                    </div>
+                    <h6 className="card-subtitle mb-2 text-muted" style={{fontSize:'0.85rem'}}>
+                        By <span className="text-info">{post.author}</span> • {new Date(post.date).toLocaleDateString()}
+                    </h6>
+                    <p className="card-text mt-3">{post.description}</p>
+                    </div>
                 </div>
-              </div>
-            ))}
-          </div>
+                ))
+            ) : (
+                <div className="alert alert-warning">No posts found or Loading...</div>
+            )}
 
+          </div>
         </div>
       </div>
     </div>
